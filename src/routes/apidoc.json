@@ -1,0 +1,11 @@
+{
+  "name": "Recipe Land",
+  "version": "0.1.1",
+  "description": "Recipe Land APIDoc",
+  "title": "Recipe Land APIDoc browser",
+  "code": "apidoc -i src/routes -o views/doc",
+  "template": {
+    "withCompare": true,
+    "withGenerator": true
+  }
+}

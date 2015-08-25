@@ -1,0 +1,8 @@
+*.idea
+*.idea/
+.idea/
+node_modules
+vendors
+Makefile
+.DS_Store
+npm-debug.log
