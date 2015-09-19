@@ -27,6 +27,7 @@
     "mongodb": "*",
     "mongoose": "*",
     "morgan": "1.5.1",
+    "multer": "^1.0.3",
     "node-schedule": "0.2.7",
     "request": "2.55.0",
     "require-directory": "~2.1.1",

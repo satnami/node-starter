@@ -1,5 +1,22 @@
-var Users = require("../models/Users"),
+var fs = require('fs'),
+    path = require('path'),
+    crypto = require('crypto'),
+    multer = require('multer'),
+    Users = require("../models/Users"),
     authToken = require('../security/authToken');
+
+
+var upload = multer({
+    storage: multer.diskStorage({
+        destination: 'public/uploads/',
+        filename: function (req, file, cb) {
+            crypto.pseudoRandomBytes(16, function (err, raw) {
+                if (err) return cb(err);
+                cb(null, raw.toString('hex') + path.extname(file.originalname));
+            })
+        }
+    })
+});
 
 var usersApi = {
     get: function (req, res) {
@@ -64,9 +81,24 @@ var errorApi = {
     }
 };
 
+var uploadApi = {
+    imageUpload: function (req, res) {
+        upload.single('file')(req, res, function (err) {
+            if (err) {
+                console.log(err.message);
+                res.status(500).json({success: false, message: 'Something blew up!'});
+                return
+            }
+            var response = {files: req.files, file: req.file, body: req.body};
+            res.status(500).json({success: true, message: response});
+        })
+    }
+};
+
 module.exports = {
     users: usersApi,
     error: errorApi,
     views: viewsApi,
+    upload: uploadApi,
     auth: authApi
 };

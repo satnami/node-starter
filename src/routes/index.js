@@ -6,6 +6,8 @@ module.exports = function (app) {
     //-----------------Views-------------------
     app.get('/', api.views.index);
 
+    app.post('/api/upload/photo', api.upload.imageUpload);
+
     //-------------------Meals API---------------------
     /**
      * @api {get} /api/users/all Get All Users
